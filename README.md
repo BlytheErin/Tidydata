@@ -38,27 +38,27 @@ list.files("test")
 train_list <- c("train/subject_train.txt", "train/y_train.txt", "train/X_train.txt")  #creates a list of training files 
 test_list <- c("test/subject_test.txt", "test/y_test.txt", "test/X_test.txt") # creating a list of the test files
 
-###column binding the training files
+### column binding the training files
 tmp <- lapply(train_list, read.table)
 traindataset <- do.call(cbind, tmp)
 
-###column binding the test files
+### column binding the test files
 tmp <- lapply(test_list, read.table)
 testdataset <- do.call(cbind, tmp)
 
-##row binding the training and test files
+## row binding the training and test files
 totaldataset <- do.call(rbind, list(traindataset, testdataset))
 
 ### Setting column names
 x <-read.table("features.txt") #file containg X_train variable names
 xx<- as.character(x[,2]) # Making a character vector of these names
 xxx<- c('ID', 'Activity', as.character(xx)) # adding names to the list for the Subject_train and Activity tables that were column bound.
-str(xxx) #taking a look at result
+str(xxx) ### taking a look at result
 
 totaldataset<- setNames(totaldataset, xxx) # setting the column names
 names(totaldataset) #checking result
 
-###Extracting resulting dataset
+### Extracting resulting dataset
 setwd("D:/Blythe")
 getwd()
 if(!file.exists("./Tidydata/data_output")){dir.create("./Tidydata/data_output")}
@@ -101,19 +101,19 @@ gsub("\\.", "", names(mergeddataset))
 mergeddataset <- setNames(mergeddataset, gsub("\\.", "", names(mergeddataset)))
 names(mergeddataset)
 
-###Extracting the file
+### Extracting the file
 setwd("D:/Blythe")
 if(!file.exists("./Tidydata/data_output")){dir.create("./Tidydata/data_output")}
 write.csv(mergeddataset, file = "Tidydata/data_output/mergeddataset.csv", row.names=FALSE)
 
 ## 5.From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-###Selecting only the Mean for each meansurement
+### Selecting only the Mean for each meansurement
 meandataset<- select(mergeddataset, ID, ActivityName, matches( "mean"))
-###checking
+### checking
 names(meandataset)
 
-###Combining the subject and acitivity variables into a new variable,
+### Combining the subject and acitivity variables into a new variable,
 ### while adding a"0" if the subject ID is less than 10 using the ifelse statement.
 
 meandataset$IDactivity<-ifelse(meandataset$ID<10, paste0("0", meandataset$ID, meandataset$ActivityName), paste0(meandataset$ID, meandataset$ActivityName)) 
@@ -131,7 +131,7 @@ byIDActivity <- dcast(c, IDactivity ~ variable, mean)
 byIDActivity
 
 
-##Extracting the file
+## Extracting the file
 setwd("D:/Blythe")
 if(!file.exists("./Tidydata/data_output")){dir.create("./Tidydata/data_output")}
 write.csv(byIDActivity, file = "Tidydata/data_output/byIDActivity.csv", row.names=FALSE)

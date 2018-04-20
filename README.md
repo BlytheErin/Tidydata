@@ -131,7 +131,7 @@ byIDActivity <- dcast(c, IDactivity ~ variable, mean)
 byIDActivity
 
 
-## Extracting the file
+### Extracting the file
 setwd("D:/Blythe")
 if(!file.exists("./Tidydata/data_output")){dir.create("./Tidydata/data_output")}
 write.csv(byIDActivity, file = "Tidydata/data_output/byIDActivity.csv", row.names=FALSE)

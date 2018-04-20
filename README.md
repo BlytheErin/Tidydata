@@ -50,7 +50,7 @@ testdataset <- do.call(cbind, tmp)
 totaldataset <- do.call(rbind, list(traindataset, testdataset))
 
 ### Setting column names
-x <-read.table("features.txt") #file containg X_train variable names
+x <-read.table("features.txt") ### file containg X_train variable names
 xx<- as.character(x[,2]) # Making a character vector of these names
 xxx<- c('ID', 'Activity', as.character(xx)) # adding names to the list for the Subject_train and Activity tables that were column bound.
 str(xxx) ### taking a look at result
@@ -72,7 +72,7 @@ valid_column_names <- make.names(names=names(totaldataset), unique=TRUE, allow_ 
 names(totaldataset) <- valid_column_names
 ### looking at new names
 names(totaldataset)
-###Selecting only the Mean and standar deviation for each meansurement
+### Selecting only the Mean and standar deviation for each meansurement
 selectdataset<- select(totaldataset, ID, Activity, contains(".mean"), contains( ".std"))
 ### checking
 names(selectdataset)

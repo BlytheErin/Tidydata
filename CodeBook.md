@@ -13,9 +13,15 @@ including "test/subject_test.txt", "test/y_test.txt", "test/X_test.txt"
 
 totaldataset: the row bound train and test datasets
 
+x: a table of all the measrement variable names 
+xx: is a character vector of just the variable names in the character structure 
+xxx is a character vector of the vairable names and the ID and Activity names that for the Subject_train and Activity tables that were column bound.
+This column names were appended to the totaldataset
+
 # 2.Extracts only the measurements on the mean and standard deviation for each measurement.
 
 selectdataset: the totaldataset with only the measurements on the mean and standard deviation of each measurement.
+The names had to be converted to valid names before the above selection.
 
 # 3.Uses descriptive activity names to name the activities in the data set
 
